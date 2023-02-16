@@ -4,8 +4,10 @@ import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.dto.Pesso
 import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.services.pessoas.interfaces.PessoaService;
 import java.util.Set;
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/pessoas")
+@Validated
 public class PessoasController {
 
   @Autowired
@@ -29,12 +32,12 @@ public class PessoasController {
   }
 
   @GetMapping("/buscar")
-  public ResponseEntity<Set<PessoaDTO>> listAll(@RequestParam String nome) {
+  public ResponseEntity<Set<PessoaDTO>> listAll(@RequestParam @NotBlank String nome) {
     return pessoaService.buscarTodosPeloNome(nome);
   }
 
   @GetMapping("/buscar/{id}")
-  public ResponseEntity<PessoaDTO> getById(@PathVariable long id) {
+  public ResponseEntity<PessoaDTO> getById(@PathVariable @NotBlank long id) {
     return pessoaService.buscarPeloId(id);
   }
 
