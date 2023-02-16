@@ -5,6 +5,7 @@ import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.Pessoa;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import lombok.Getter;
@@ -21,7 +22,7 @@ public class PessoaDTO implements Serializable {
   @NotBlank(message = "data de nascimento é obrigatorio")
   private String dataNascimento;
 
-  @NotNull(message = "endereco é obrigatorio")
+  @NotNull(message = "endereco é obrigatorio") @Valid
   private Set<Endereco> enderecos = new HashSet<>();
 
   public PessoaDTO(Pessoa pessoa) {

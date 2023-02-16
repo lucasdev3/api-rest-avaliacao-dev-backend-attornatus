@@ -5,7 +5,6 @@ import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.Pessoa;
 import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.dto.PessoaDTO;
 import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.repositories.PessoaRepository;
 import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.services.pessoas.interfaces.PessoaService;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -71,7 +70,10 @@ public class PessoaServiceImpl implements PessoaService {
   @Override
   public ResponseEntity<?> salvar(PessoaDTO pessoaDTO) {
     try {
-      validacaoEnderecos(pessoaDTO.getEnderecos());
+      if (!validacaoEnderecos(pessoaDTO.getEnderecos())) {
+        return ResponseEntity.badRequest()
+            .body("É necessário pelo menos 1 endereço e somente 1 pode o principal!");
+      }
       Pessoa pessoa = new Pessoa(pessoaDTO);
       pessoaRepository.save(pessoa);
       return ResponseEntity.ok().body("Pessoa cadastrada com sucesso!");
@@ -84,12 +86,15 @@ public class PessoaServiceImpl implements PessoaService {
   @Override
   public ResponseEntity<?> atualizar(PessoaDTO pessoaDTO, Long id) {
     try {
+      if (!validacaoEnderecos(pessoaDTO.getEnderecos())) {
+        return ResponseEntity.badRequest()
+            .body("É necessário pelo menos 1 endereço e somente 1 pode ser o principal!");
+      }
       Pessoa pessoa = pessoaRepository.findById(id).orElse(null);
       if (pessoa == null) {
         LOGGER.error("Falha ao atualizar pessoa. Pessoa não encontrado na base de dados!");
         return ResponseEntity.notFound().build();
       }
-      validacaoEnderecos(pessoaDTO.getEnderecos());
       pessoa.update(pessoaDTO);
       pessoaRepository.save(pessoa);
       LOGGER.info("Pessoa atualizada com sucesso!");
@@ -113,16 +118,22 @@ public class PessoaServiceImpl implements PessoaService {
     return ResponseEntity.internalServerError().build();
   }
 
-  private static void validacaoEnderecos(Set<Endereco> enderecos) {
+  private static Boolean validacaoEnderecos(Set<Endereco> enderecos) {
+    if (enderecos.size() == 0) {
+      LOGGER.error("É necessário pelo menos 1 endereço!");
+      return false;
+    }
     int cnt = 0;
     for (Endereco endereco : enderecos) {
       if (endereco.getEnderecoPrincipal()) {
         cnt++;
       }
     }
-    if (cnt > 1) {
-      ResponseEntity.badRequest().body("Pessoa só pode ter um endereço principal");
+    if (cnt > 1 || cnt == 0) {
+      LOGGER.error("Pessoa só pode ter um endereço principal");
+      return false;
     }
+    return true;
   }
 
 

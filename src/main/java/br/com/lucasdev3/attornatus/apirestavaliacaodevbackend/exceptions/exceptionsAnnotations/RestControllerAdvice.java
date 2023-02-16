@@ -1,4 +1,5 @@
 package br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.exceptions.exceptionsAnnotations;
+
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
