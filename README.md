@@ -15,7 +15,7 @@
 * Git e CVS
 * Javascript
 
-#### Contatos:
+#### Contatos
 * Linkedin - https://www.linkedin.com/in/lucas-souza-478a031ab/
 * GitHub - https://www.github.com/lucasdev3/
 
@@ -42,7 +42,7 @@ Uma Pessoa deve ter os seguintes campos
 
 ### DESENVOLVIMENTO
 
-#### Tecnologias utilizadas:
+#### Tecnologias utilizadas
 
 * Sistema Operacional: Windows (Compativel com linux, testado nas distribuições Ubuntu e Fedora).
 * Java 11 Eclipse Adoptium jdk-11.0.17.8-hotspot.
@@ -50,8 +50,8 @@ Uma Pessoa deve ter os seguintes campos
 * Banco de dados H2 (em memória).
 * Spring Boot 2.7.2
 * JPA para persistencia e manipulação de dados.
-* Bean validation para validações de atributos com validação global para do tipo
-  MethodArgumentNotValidException'.
+* Bean validation para validações de atributos com validação global do tipo
+  'MethodArgumentNotValidException'.
 * Swagger para documentação e testes de requisições na API disponivel na
   url: http://localhost:8080/swagger-ui/
 * Log4j para logs em runtime e criação de um arquivo de logs no diretorio:
@@ -72,7 +72,7 @@ Uma Pessoa deve ter os seguintes campos
 * Não é possivel ter mais de uma pessoa com o mesmo nome no banco.
 * Não é possivel cadastrar/atualizar uma pessoa no banco sem a lista de endereços
 * Não é possivel cadastrar/atualizar uma pessoa sem que ter ao menos um endereço com o atributo
-  'tabelaPrincipal' com valor 'true (boolean)'.
+  'enderecoPrincipal' com valor 'true (boolean)'.
 
 #### Exemplo de cadastro de pessoa — PessoaDTO
 
