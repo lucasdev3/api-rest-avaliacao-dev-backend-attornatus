@@ -50,12 +50,13 @@ Uma Pessoa deve ter os seguintes campos
 * Banco de dados H2 (em memória).
 * Spring Boot 2.7.2
 * JPA para persistencia e manipulação de dados.
-* Bean validation para validações de atributos com validação global para do tipo '
+* Bean validation para validações de atributos com validação global para do tipo
   MethodArgumentNotValidException'.
 * Swagger para documentação e testes de requisições na API disponivel na
   url: http://localhost:8080/swagger-ui/
 * Log4j para logs em runtime e criação de um arquivo de logs no diretorio:
   /log-attornatus-lucasdev3-avaliacao/tmp/attornatus.log
+* JUnit para testes unitários
 
 #### Pontos de atenção
 
@@ -70,10 +71,10 @@ Uma Pessoa deve ter os seguintes campos
 
 * Não é possivel ter mais de uma pessoa com o mesmo nome no banco.
 * Não é possivel cadastrar/atualizar uma pessoa no banco sem a lista de endereços
-* Não é possivel cadastrar/atualizar uma pessoa sem que tenha pelo menos um endereço com o atributo
-  'tabelaPrincipal' retornando 'true (boolean)'.
+* Não é possivel cadastrar/atualizar uma pessoa sem que ter ao menos um endereço com o atributo
+  'tabelaPrincipal' com valor 'true (boolean)'.
 
-#### Exemplo de cadastro de pessoa - PessoaDTO
+#### Exemplo de cadastro de pessoa — PessoaDTO
 
 * Metodo: POST - Rota: /pessoas/salvar
 * JSON a ser enviado:
@@ -97,14 +98,14 @@ Uma Pessoa deve ter os seguintes campos
      ]
     }
     ```
-* JSON de resposta - Exemplo de sucesso (200 - Ok):
+* JSON de resposta — Exemplo de sucesso (200 - Ok):
     ```
     {
       "date": "17/02/2023 01:50:43:271",
       "message": "Pessoa cadastrada com sucesso!"
     }
     ```
-* JSON de resposta - Exemplo de falha (400 - BadRequest):
+* JSON de resposta  Exemplo de falha (400 - BadRequest):
   ```
     {
       "date": "17/02/2023 01:52:07:430",
