@@ -10,4 +10,6 @@ public interface PessoaRepository extends JpaRepository<Pessoa, Long> {
 
   ArrayList<Pessoa> findAllByNomeContaining(String nome);
 
+  Boolean existsByNome(String nome);
+
 }

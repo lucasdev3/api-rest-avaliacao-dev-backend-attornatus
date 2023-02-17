@@ -5,6 +5,7 @@ import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.Pessoa;
 import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.dto.PessoaDTO;
 import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.repositories.PessoaRepository;
 import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.services.pessoas.interfaces.PessoaService;
+import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.utils.ResponseModel;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -17,7 +18,11 @@ import org.springframework.stereotype.Service;
 public class PessoaServiceImpl implements PessoaService {
 
   @Autowired
-  private PessoaRepository pessoaRepository;
+  private final PessoaRepository pessoaRepository;
+
+  public PessoaServiceImpl(PessoaRepository pessoaRepository) {
+    this.pessoaRepository = pessoaRepository;
+  }
 
   private static final Logger LOGGER = Logger.getLogger(PessoaServiceImpl.class);
 
@@ -74,9 +79,12 @@ public class PessoaServiceImpl implements PessoaService {
         return ResponseEntity.badRequest()
             .body("É necessário pelo menos 1 endereço e somente 1 pode o principal!");
       }
+      if (existePessoaCadastrada(pessoaDTO.getNome())) {
+        return ResponseEntity.badRequest().body(new ResponseModel("Nome já cadastrado no banco!"));
+      }
       Pessoa pessoa = new Pessoa(pessoaDTO);
       pessoaRepository.save(pessoa);
-      return ResponseEntity.ok().body("Pessoa cadastrada com sucesso!");
+      return ResponseEntity.ok().body(new ResponseModel("Pessoa cadastrada com sucesso!"));
     } catch (Exception e) {
       LOGGER.error("Falha ao cadastrar pessoa!\n" + e.getMessage());
     }
@@ -91,9 +99,15 @@ public class PessoaServiceImpl implements PessoaService {
             .body("É necessário pelo menos 1 endereço e somente 1 pode ser o principal!");
       }
       Pessoa pessoa = pessoaRepository.findById(id).orElse(null);
+      Boolean existePessoa = existePessoaCadastrada(pessoaDTO.getNome());
       if (pessoa == null) {
         LOGGER.error("Falha ao atualizar pessoa. Pessoa não encontrado na base de dados!");
         return ResponseEntity.notFound().build();
+      }
+      if (existePessoa || pessoaDTO.getNome().equalsIgnoreCase(pessoa.getNome())) {
+        LOGGER.error("Nome já existente na base de dados");
+        return ResponseEntity.badRequest()
+            .body(new ResponseModel("Nome já existente na base de dados"));
       }
       pessoa.update(pessoaDTO);
       pessoaRepository.save(pessoa);
@@ -111,14 +125,18 @@ public class PessoaServiceImpl implements PessoaService {
     try {
       pessoaRepository.deleteById(id);
       LOGGER.info("Pessoa deletada com sucesso!");
-      return ResponseEntity.ok().body("pessoa deletada com sucesso!");
+      return ResponseEntity.ok().body(new ResponseModel("Pessoa deletada com sucesso!"));
     } catch (Exception e) {
       LOGGER.error("Falha ao deletar médico!\n" + e.getMessage());
     }
     return ResponseEntity.internalServerError().build();
   }
 
-  private static Boolean validacaoEnderecos(Set<Endereco> enderecos) {
+  /* ESTA REGRA GARANTE QUE NO BANCO SEJA CADASTRADO PELO MENOS UM ENDEREÇO NA LISTA DE ENDEREÇOS
+     DA PESSOA E CERTIFICA QUE A PESSOA TENHA UM ENDERECO PRINCIPAL. SE A LISTA SO TIVER UM ENDERECO
+     O MESMO SERIA CONSIDERADO COMO PRINCIPAL POR PADRAO */
+  private Boolean validacaoEnderecos(Set<Endereco> enderecos) {
+
     if (enderecos.size() == 0) {
       LOGGER.error("É necessário pelo menos 1 endereço!");
       return false;
@@ -134,6 +152,10 @@ public class PessoaServiceImpl implements PessoaService {
       return false;
     }
     return true;
+  }
+
+  private Boolean existePessoaCadastrada(String nome) {
+    return pessoaRepository.existsByNome(nome);
   }
 
 
