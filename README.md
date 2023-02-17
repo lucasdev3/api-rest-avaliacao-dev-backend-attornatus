@@ -4,6 +4,17 @@
 
 ## Desenvolvedor - Lucas Souza
 
+#### Qualificações
+* Java Core
+* Maven
+* Spring Boot
+* JPA
+* JDBC
+* Oracle DB, MySQL, PostgresSQL
+* Linux
+* Git e CVS
+* Javascript
+
 #### Contatos:
 * Linkedin - https://www.linkedin.com/in/lucas-souza-478a031ab/
 * GitHub - https://www.github.com/lucasdev3/
@@ -53,6 +64,7 @@ Uma Pessoa deve ter os seguintes campos
 * Verifique a versão do Spring Boot
 * Verifique a existencia do diretório de logs do Log4j. Caso a aplicação não crie automaticamente,
   crie-o manualmente (mais informações no arquivo log4j.properties na raiz do projeto).
+* A API fica em execução na porta 8080 local. Garanta que a mesma esteja livre para subir a aplicação.
 
 #### Regras criadas pelo desenvolvedor
 
