@@ -39,6 +39,15 @@ Uma Pessoa deve ter os seguintes campos
     * Logradouro
     * CEP
     * Numero
+    
+### QUESTÕES — QUALIDADE DE CÓDIGO
+1.	Durante a implementação de uma nova funcionalidade de software solicitada, quais critérios você avalia e implementa para garantia de qualidade de software?
+  * Resposta: Como critérios avalio a funcionalidade ( a que se destina o produto ), confiabilidade, usabilidade, eficiência ( desempenho compatível com os requisitos do produto ), manutenção e portabilidade. 
+  
+2.	Em qual etapa da implementação você considera a qualidade de software?
+  * Resposta: Considero a qualidade de software desde a identificação de defeitos até fase VV&T ( validação, verificação e testes ). 
+
+
 
 ### DESENVOLVIMENTO
 
