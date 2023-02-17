@@ -7,7 +7,6 @@ import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.repositories.Pesso
 import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.services.pessoas.interfaces.PessoaService;
 import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.utils.ResponseModel;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,14 +26,14 @@ public class PessoaServiceImpl implements PessoaService {
   private static final Logger LOGGER = Logger.getLogger(PessoaServiceImpl.class);
 
   @Override
-  public ResponseEntity<Set<PessoaDTO>> buscarTodos() {
+  public ResponseEntity<List<PessoaDTO>> buscarTodos() {
     try {
       List<Pessoa> pessoas = pessoaRepository.findAll();
       if (pessoas.isEmpty()) {
         LOGGER.info("Nenhuma pessoa encontrada!");
         return ResponseEntity.notFound().build();
       }
-      return ResponseEntity.ok(pessoas.stream().map(PessoaDTO::new).collect(Collectors.toSet()));
+      return ResponseEntity.ok(pessoas.stream().map(PessoaDTO::new).collect(Collectors.toList()));
     } catch (Exception e) {
       LOGGER.error(e);
     }
@@ -42,14 +41,14 @@ public class PessoaServiceImpl implements PessoaService {
   }
 
   @Override
-  public ResponseEntity<Set<PessoaDTO>> buscarTodosPeloNome(String nome) {
+  public ResponseEntity<List<PessoaDTO>> buscarTodosPeloNome(String nome) {
     try {
       List<Pessoa> pessoas = pessoaRepository.findAllByNomeContaining(nome);
       if (pessoas.iterator().hasNext()) {
         LOGGER.info("Nenhuma pessoa encontrada pelo nome!");
         return ResponseEntity.notFound().build();
       }
-      return ResponseEntity.ok(pessoas.stream().map(PessoaDTO::new).collect(Collectors.toSet()));
+      return ResponseEntity.ok(pessoas.stream().map(PessoaDTO::new).collect(Collectors.toList()));
     } catch (Exception e) {
       LOGGER.error(e);
     }
@@ -66,6 +65,29 @@ public class PessoaServiceImpl implements PessoaService {
       }
       PessoaDTO dto = new PessoaDTO(pessoa);
       return ResponseEntity.ok(dto);
+    } catch (Exception e) {
+      LOGGER.error("Falha ao listar pessoa por id!\n" + e.getMessage());
+    }
+    return ResponseEntity.internalServerError().build();
+  }
+
+  @Override
+  public ResponseEntity<List<Endereco>> buscarEnderecoPeloId(Long id, Boolean enderecoPrincipal) {
+    try {
+      Pessoa pessoa = pessoaRepository.findById(id).orElse(null);
+      if (pessoa == null) {
+        LOGGER.info("Nenhuma pessoa encontrado pelo id!");
+        return ResponseEntity.notFound().build();
+      }
+      PessoaDTO dto = new PessoaDTO(pessoa);
+      if (enderecoPrincipal) {
+        return ResponseEntity.ok(
+            dto.getEnderecos().stream().filter(Endereco::getEnderecoPrincipal).collect(
+                Collectors.toList()));
+      } else {
+        return ResponseEntity.ok(dto.getEnderecos());
+      }
+
     } catch (Exception e) {
       LOGGER.error("Falha ao listar pessoa por id!\n" + e.getMessage());
     }
@@ -135,7 +157,7 @@ public class PessoaServiceImpl implements PessoaService {
   /* ESTA REGRA GARANTE QUE NO BANCO SEJA CADASTRADO PELO MENOS UM ENDEREÇO NA LISTA DE ENDEREÇOS
      DA PESSOA E CERTIFICA QUE A PESSOA TENHA UM ENDERECO PRINCIPAL. SE A LISTA SO TIVER UM ENDERECO
      O MESMO SERIA CONSIDERADO COMO PRINCIPAL POR PADRAO */
-  private Boolean validacaoEnderecos(Set<Endereco> enderecos) {
+  private Boolean validacaoEnderecos(List<Endereco> enderecos) {
 
     if (enderecos.size() == 0) {
       LOGGER.error("É necessário pelo menos 1 endereço!");

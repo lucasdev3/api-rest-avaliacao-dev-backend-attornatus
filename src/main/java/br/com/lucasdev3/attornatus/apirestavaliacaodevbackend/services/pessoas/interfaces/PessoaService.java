@@ -1,16 +1,19 @@
 package br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.services.pessoas.interfaces;
 
+import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.Endereco;
 import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.dto.PessoaDTO;
-import java.util.Set;
+import java.util.List;
 import org.springframework.http.ResponseEntity;
 
 public interface PessoaService {
 
-  ResponseEntity<Set<PessoaDTO>> buscarTodos();
+  ResponseEntity<List<PessoaDTO>> buscarTodos();
 
-  ResponseEntity<Set<PessoaDTO>> buscarTodosPeloNome(String nome);
+  ResponseEntity<List<PessoaDTO>> buscarTodosPeloNome(String nome);
 
   ResponseEntity<PessoaDTO> buscarPeloId(Long id);
+
+  ResponseEntity<List<Endereco>> buscarEnderecoPeloId(Long id, Boolean enderecoPrincipal);
 
   ResponseEntity<?> salvar(PessoaDTO pessoaDTO);
 

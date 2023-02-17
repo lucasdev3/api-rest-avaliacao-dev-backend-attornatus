@@ -4,6 +4,10 @@
 
 ## Desenvolvedor - Lucas Souza
 
+#### Contatos:
+* Linkedin - https://www.linkedin.com/in/lucas-souza-478a031ab/
+* GitHub - https://www.github.com/lucasdev3/
+
 ### Desafio Java
 
 Usando Spring Boot, crie uma API simples para gerenciar Pessoas. Esta API deve permitir:
@@ -88,7 +92,7 @@ Uma Pessoa deve ter os seguintes campos
       "message": "Pessoa cadastrada com sucesso!"
     }
     ```
-  * JSON de resposta - Exemplo de falha (400 - BadRequest):
+* JSON de resposta - Exemplo de falha (400 - BadRequest):
   ```
     {
       "date": "17/02/2023 01:52:07:430",

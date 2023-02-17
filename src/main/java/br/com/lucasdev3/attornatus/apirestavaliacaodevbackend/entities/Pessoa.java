@@ -2,8 +2,7 @@ package br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities;
 
 import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.dto.PessoaDTO;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.CollectionTable;
@@ -41,7 +40,7 @@ public class Pessoa implements Serializable {
   @Column(name = "data_nascimento")
   private String dataNascimento;
 
-  @ElementCollection(fetch = FetchType.LAZY)
+  @ElementCollection(fetch = FetchType.EAGER)
   @Column(name = "endereco")
   @CollectionTable(name = "pessoa_endereco", joinColumns = @JoinColumn(name = "pessoa_id"))
   @AttributeOverrides({
@@ -50,7 +49,7 @@ public class Pessoa implements Serializable {
       @AttributeOverride(name = "numero", column = @Column(name = "numero")),
       @AttributeOverride(name = "enderecoPrincipal", column = @Column(name = "enderecoPrincipal"))
   })
-  private Set<Endereco> enderecos = new HashSet<>();
+  private List<Endereco> enderecos;
 
   public Pessoa(PessoaDTO dto) {
     this.nome = dto.getNome();
@@ -69,6 +68,5 @@ public class Pessoa implements Serializable {
       dto.getEnderecos().iterator().next().setEnderecoPrincipal(true);
     }
   }
-
 
 }

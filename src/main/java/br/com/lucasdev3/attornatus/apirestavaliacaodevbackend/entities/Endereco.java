@@ -3,7 +3,7 @@ package br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities;
 import java.io.Serializable;
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,6 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Endereco implements Serializable {
 
   private static final long serialVersionUID = 1L;
