@@ -1,9 +1,9 @@
 package br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.services.pessoas.interfaces;
 
-import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.dto.Endereco;
-import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.dto.PessoaDTO;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
+import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.dto.EnderecoDTO;
+import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.dto.PessoaDTO;
 
 public interface PessoaService {
 
@@ -13,7 +13,7 @@ public interface PessoaService {
 
   ResponseEntity<PessoaDTO> buscarPeloId(Long id);
 
-  ResponseEntity<List<Endereco>> buscarEnderecoPeloId(Long id, Boolean enderecoPrincipal);
+  ResponseEntity<List<EnderecoDTO>> buscarEnderecoPeloId(Long id, Boolean enderecoPrincipal);
 
   ResponseEntity<?> salvar(PessoaDTO pessoaDTO);
 

@@ -2,8 +2,6 @@ package br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.dto;
 
 import java.io.Serializable;
 import javax.persistence.Embeddable;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
@@ -16,7 +14,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Endereco implements Serializable {
+public class EnderecoDTO implements Serializable {
 
   private static final long serialVersionUID = 1L;
 

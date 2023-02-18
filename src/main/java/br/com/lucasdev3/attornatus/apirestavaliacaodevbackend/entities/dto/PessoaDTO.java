@@ -1,12 +1,12 @@
 package br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.dto;
 
-import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.Pessoa;
 import java.io.Serializable;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.Pessoa;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,7 +26,7 @@ public class PessoaDTO implements Serializable {
 
   @NotNull(message = "endereco é obrigatorio")
   @Valid
-  private List<Endereco> enderecos;
+  private List<EnderecoDTO> enderecos;
 
   public PessoaDTO(@Valid Pessoa pessoa) {
     this.nome = pessoa.getNome();

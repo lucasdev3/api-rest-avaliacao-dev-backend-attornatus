@@ -1,17 +1,17 @@
 package br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.services.pessoas.impl;
 
-import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.Pessoa;
-import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.dto.Endereco;
-import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.dto.PessoaDTO;
-import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.repositories.PessoaRepository;
-import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.services.pessoas.interfaces.PessoaService;
-import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.utils.ResponseModel;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.Pessoa;
+import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.dto.EnderecoDTO;
+import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.dto.PessoaDTO;
+import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.repositories.PessoaRepository;
+import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.services.pessoas.interfaces.PessoaService;
+import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.utils.ResponseModel;
 
 @Service
 public class PessoaServiceImpl implements PessoaService {
@@ -72,7 +72,7 @@ public class PessoaServiceImpl implements PessoaService {
   }
 
   @Override
-  public ResponseEntity<List<Endereco>> buscarEnderecoPeloId(Long id, Boolean enderecoPrincipal) {
+  public ResponseEntity<List<EnderecoDTO>> buscarEnderecoPeloId(Long id, Boolean enderecoPrincipal) {
     try {
       Pessoa pessoa = pessoaRepository.findById(id).orElse(null);
       if (pessoa == null) {
@@ -82,7 +82,7 @@ public class PessoaServiceImpl implements PessoaService {
       PessoaDTO dto = new PessoaDTO(pessoa);
       if (enderecoPrincipal) {
         return ResponseEntity.ok(
-            dto.getEnderecos().stream().filter(Endereco::getEnderecoPrincipal).collect(
+            dto.getEnderecos().stream().filter(EnderecoDTO::getEnderecoPrincipal).collect(
                 Collectors.toList()));
       } else {
         return ResponseEntity.ok(dto.getEnderecos());
@@ -163,14 +163,14 @@ public class PessoaServiceImpl implements PessoaService {
   /* ESTA REGRA GARANTE QUE NO BANCO SEJA CADASTRADO PELO MENOS UM ENDEREÇO NA LISTA DE ENDEREÇOS
      DA PESSOA E CERTIFICA QUE A PESSOA TENHA UM ENDERECO PRINCIPAL. SE A LISTA SO TIVER UM ENDERECO
      O MESMO SERIA CONSIDERADO COMO PRINCIPAL POR PADRAO */
-  private Boolean validacaoEnderecos(List<Endereco> enderecos) {
+  private Boolean validacaoEnderecos(List<EnderecoDTO> enderecos) {
 
     if (enderecos.size() == 0) {
       LOGGER.error("É necessário pelo menos 1 endereço!");
       return false;
     }
     int cnt = 0;
-    for (Endereco endereco : enderecos) {
+    for (EnderecoDTO endereco : enderecos) {
       if (endereco.getEnderecoPrincipal()) {
         cnt++;
       }

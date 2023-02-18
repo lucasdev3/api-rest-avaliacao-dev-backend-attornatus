@@ -1,6 +1,5 @@
 package br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.exceptions;
 
-import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.exceptions.exceptionsAnnotations.RestControllerAdvice;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.exceptions.exceptionsAnnotations.RestControllerAdvice;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {

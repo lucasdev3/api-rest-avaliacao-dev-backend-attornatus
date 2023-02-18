@@ -1,8 +1,5 @@
 package br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.controllers;
 
-import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.dto.Endereco;
-import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.dto.PessoaDTO;
-import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.services.pessoas.interfaces.PessoaService;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.dto.EnderecoDTO;
+import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.dto.PessoaDTO;
+import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.services.pessoas.interfaces.PessoaService;
 
 @RestController
 @RequestMapping(value = "/pessoas")
@@ -45,7 +45,7 @@ public class PessoasController {
   }
 
   @GetMapping(value = "/buscar-enderecos/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<List<Endereco>> getEnderecosById(@PathVariable long id,
+  public ResponseEntity<List<EnderecoDTO>> getEnderecosById(@PathVariable long id,
       @RequestParam Boolean enderecoPrincipal) {
     return pessoaService.buscarEnderecoPeloId(id, enderecoPrincipal);
   }

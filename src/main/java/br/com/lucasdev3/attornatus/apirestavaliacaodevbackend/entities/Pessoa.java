@@ -1,7 +1,5 @@
 package br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities;
 
-import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.dto.Endereco;
-import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.dto.PessoaDTO;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.AttributeOverride;
@@ -16,6 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
+import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.dto.EnderecoDTO;
+import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.dto.PessoaDTO;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -50,7 +50,7 @@ public class Pessoa implements Serializable {
       @AttributeOverride(name = "numero", column = @Column(name = "numero")),
       @AttributeOverride(name = "enderecoPrincipal", column = @Column(name = "enderecoPrincipal"))
   })
-  private List<Endereco> enderecos;
+  private List<EnderecoDTO> enderecos;
 
   public Pessoa(PessoaDTO dto) {
     this.nome = dto.getNome();
