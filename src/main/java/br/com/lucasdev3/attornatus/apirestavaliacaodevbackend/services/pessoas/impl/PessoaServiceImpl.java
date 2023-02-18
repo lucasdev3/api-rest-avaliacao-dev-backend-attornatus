@@ -1,7 +1,7 @@
 package br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.services.pessoas.impl;
 
-import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.Endereco;
 import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.Pessoa;
+import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.dto.Endereco;
 import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.dto.PessoaDTO;
 import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.repositories.PessoaRepository;
 import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.services.pessoas.interfaces.PessoaService;
@@ -125,8 +125,8 @@ public class PessoaServiceImpl implements PessoaService {
       Pessoa pessoa = pessoaRepository.findById(id).orElse(null);
       Boolean existeNomePessoa = existePessoaCadastrada(pessoaDTO.getNome());
       if (pessoa == null) {
-        LOGGER.error("Falha ao atualizar pessoa. Pessoa não encontrado na base de dados!");
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.badRequest().body(new ResponseModel(
+            "Falha ao atualizar pessoa. Pessoa não encontrado na base de dados!"));
       }
       if (existeNomePessoa && !pessoaDTO.getNome().equalsIgnoreCase(pessoa.getNome())) {
         LOGGER.error("Nome já existente na base de dados");

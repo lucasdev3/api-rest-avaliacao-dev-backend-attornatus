@@ -1,11 +1,10 @@
 package br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.pessoas;
 
-import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.Endereco;
+import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.dto.Endereco;
 import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.Pessoa;
 import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.dto.PessoaDTO;
 import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.services.pessoas.interfaces.PessoaService;
 import java.util.Arrays;
-import javax.validation.Valid;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

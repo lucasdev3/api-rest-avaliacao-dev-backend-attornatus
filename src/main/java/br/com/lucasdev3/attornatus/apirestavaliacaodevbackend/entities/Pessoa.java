@@ -1,5 +1,6 @@
 package br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities;
 
+import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.dto.Endereco;
 import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.dto.PessoaDTO;
 import java.io.Serializable;
 import java.util.List;

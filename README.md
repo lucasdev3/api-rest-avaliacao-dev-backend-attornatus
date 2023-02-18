@@ -16,8 +16,7 @@
 * Git e CVS
 * Javascript
 
-#### Contatos:
-
+#### Contatos
 * Linkedin - https://www.linkedin.com/in/lucas-souza-478a031ab/
 * GitHub - https://www.github.com/lucasdev3/
 
@@ -41,10 +40,19 @@ Uma Pessoa deve ter os seguintes campos
     * Logradouro
     * CEP
     * Numero
+    
+### QUESTÕES — QUALIDADE DE CÓDIGO
+1.	Durante a implementação de uma nova funcionalidade de software solicitada, quais critérios você avalia e implementa para garantia de qualidade de software?
+  * Resposta: Como critérios avalio a funcionalidade ( a que se destina o produto ), confiabilidade, usabilidade, eficiência ( desempenho compatível com os requisitos do produto ), manutenção e portabilidade. 
+  
+2.	Em qual etapa da implementação você considera a qualidade de software?
+  * Resposta: Considero a qualidade de software desde a identificação de defeitos até fase VV&T ( validação, verificação e testes ). 
+
+
 
 ### DESENVOLVIMENTO
 
-#### Tecnologias utilizadas:
+#### Tecnologias utilizadas
 
 * Sistema Operacional: Windows (Compativel com linux, testado nas distribuições Ubuntu e Fedora).
 * Java 11 Eclipse Adoptium jdk-11.0.17.8-hotspot.
@@ -52,8 +60,8 @@ Uma Pessoa deve ter os seguintes campos
 * Banco de dados H2 (em memória).
 * Spring Boot 2.7.2
 * JPA para persistencia e manipulação de dados.
-* Bean validation para validações de atributos com validação global para do tipo
-  MethodArgumentNotValidException'.
+* Bean validation para validações de atributos com validação global do tipo
+  'MethodArgumentNotValidException'.
 * Swagger para documentação e testes de requisições na API disponivel na
   url: http://localhost:8080/swagger-ui/
 * Log4j para logs em runtime e criação de um arquivo de logs no diretorio:
@@ -67,15 +75,14 @@ Uma Pessoa deve ter os seguintes campos
 * Verifique a versão do Spring Boot
 * Verifique a existencia do diretório de logs do Log4j. Caso a aplicação não crie automaticamente,
   crie-o manualmente (mais informações no arquivo log4j.properties na raiz do projeto).
-* A API fica em execução na porta 8080 local. Garanta que a mesma esteja livre para subir a
-  aplicação.
+* A API fica em execução na porta 8080 local. Garanta que a mesma esteja livre para subir a aplicação.
 
 #### Regras criadas pelo desenvolvedor
 
 * Não é possivel ter mais de uma pessoa com o mesmo nome no banco.
 * Não é possivel cadastrar/atualizar uma pessoa no banco sem a lista de endereços
 * Não é possivel cadastrar/atualizar uma pessoa sem ter ao menos um endereço com o atributo
-  'tabelaPrincipal' com valor 'true (boolean)'.
+  'enderecoPrincipal' com valor 'true (boolean)'.
 
 #### Exemplo de cadastro de pessoa — PessoaDTO
 
@@ -108,7 +115,7 @@ Uma Pessoa deve ter os seguintes campos
       "message": "Pessoa cadastrada com sucesso!"
     }
     ```
-* JSON de resposta Exemplo de falha (400 - BadRequest):
+* JSON de resposta — Exemplo de falha (400 - BadRequest):
   ```
     {
       "date": "17/02/2023 01:52:07:430",
@@ -142,3 +149,8 @@ Uma Pessoa deve ter os seguintes campos
       }
     ]
     ```
+
+#### Base de Dados H2
+http://localhost:8080/h2-console/
+#### Swagger-UI
+http://localhost:8080/swagger-ui/

@@ -1,4 +1,4 @@
-package br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities;
+package br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.dto;
 
 import java.io.Serializable;
 import javax.persistence.Embeddable;

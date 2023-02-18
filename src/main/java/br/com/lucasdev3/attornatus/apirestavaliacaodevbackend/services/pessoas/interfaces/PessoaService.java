@@ -1,6 +1,6 @@
 package br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.services.pessoas.interfaces;
 
-import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.Endereco;
+import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.dto.Endereco;
 import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.dto.PessoaDTO;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
