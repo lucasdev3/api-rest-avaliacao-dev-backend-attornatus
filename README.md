@@ -5,6 +5,7 @@
 ## Desenvolvedor - Lucas Souza
 
 #### Qualificações
+
 * Java Core
 * Maven
 * Spring Boot
@@ -16,6 +17,7 @@
 * Javascript
 
 #### Contatos:
+
 * Linkedin - https://www.linkedin.com/in/lucas-souza-478a031ab/
 * GitHub - https://www.github.com/lucasdev3/
 
@@ -65,13 +67,14 @@ Uma Pessoa deve ter os seguintes campos
 * Verifique a versão do Spring Boot
 * Verifique a existencia do diretório de logs do Log4j. Caso a aplicação não crie automaticamente,
   crie-o manualmente (mais informações no arquivo log4j.properties na raiz do projeto).
-* A API fica em execução na porta 8080 local. Garanta que a mesma esteja livre para subir a aplicação.
+* A API fica em execução na porta 8080 local. Garanta que a mesma esteja livre para subir a
+  aplicação.
 
 #### Regras criadas pelo desenvolvedor
 
 * Não é possivel ter mais de uma pessoa com o mesmo nome no banco.
 * Não é possivel cadastrar/atualizar uma pessoa no banco sem a lista de endereços
-* Não é possivel cadastrar/atualizar uma pessoa sem que ter ao menos um endereço com o atributo
+* Não é possivel cadastrar/atualizar uma pessoa sem ter ao menos um endereço com o atributo
   'tabelaPrincipal' com valor 'true (boolean)'.
 
 #### Exemplo de cadastro de pessoa — PessoaDTO
@@ -80,22 +83,22 @@ Uma Pessoa deve ter os seguintes campos
 * JSON a ser enviado:
     ```
     {
-     "nome": "teste5",
-     "dataNascimento": "teste4",
-     "enderecos": [
-         {
-           "logradouro": "teste4",
-           "cep": "12123123",
-           "numero": "44",
-           "enderecoPrincipal": false
-         },
-         {
-           "logradouro": "teste44",
-           "cep": "14444444",
-           "numero": "444",
-           "enderecoPrincipal": true
-         }
-     ]
+        "nome": "teste44",
+        "dataNascimento": "20-06-1996",
+        "enderecos": [
+            {
+                "logradouro": "teste4",
+                "cep": "12372-120",
+                "numero": "44",
+                "enderecoPrincipal": false
+            },
+            {
+                "logradouro": "teste44",
+                "cep": "12372-120",
+                "numero": "55",
+                "enderecoPrincipal": true
+            }
+        ]
     }
     ```
 * JSON de resposta — Exemplo de sucesso (200 - Ok):
@@ -105,7 +108,7 @@ Uma Pessoa deve ter os seguintes campos
       "message": "Pessoa cadastrada com sucesso!"
     }
     ```
-* JSON de resposta  Exemplo de falha (400 - BadRequest):
+* JSON de resposta Exemplo de falha (400 - BadRequest):
   ```
     {
       "date": "17/02/2023 01:52:07:430",
@@ -119,23 +122,23 @@ Uma Pessoa deve ter os seguintes campos
   * Retorno:
     ```
     [
-        {
-            "nome": "teste5",
-            "dataNascimento": "teste4",
-            "enderecos": [
-                {
-                    "logradouro": "teste44",
-                    "cep": "14444444",
-                    "numero": "444",
-                    "enderecoPrincipal": true
-                },
-                {
-                    "logradouro": "teste4",
-                    "cep": "12123123",
-                    "numero": "44",
-                    "enderecoPrincipal": false
-                }
-            ]
-        }
+      {
+          "nome": "teste44",
+          "dataNascimento": "20-06-1996",
+          "enderecos": [
+              {
+                  "logradouro": "teste4",
+                  "cep": "12372-120",
+                  "numero": "44",
+                  "enderecoPrincipal": false
+              },
+              {
+                  "logradouro": "teste44",
+                  "cep": "12372-120",
+                  "numero": "55",
+                  "enderecoPrincipal": true
+              }
+          ]
+      }
     ]
     ```

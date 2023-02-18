@@ -99,7 +99,8 @@ public class PessoaServiceImpl implements PessoaService {
     try {
       if (!validacaoEnderecos(pessoaDTO.getEnderecos())) {
         return ResponseEntity.badRequest()
-            .body("É necessário pelo menos 1 endereço e somente 1 pode o principal!");
+            .body(new ResponseModel(
+                "É necessário pelo menos 1 endereço e somente 1 pode o principal!"));
       }
       if (existePessoaCadastrada(pessoaDTO.getNome())) {
         return ResponseEntity.badRequest().body(new ResponseModel("Nome já cadastrado no banco!"));
@@ -118,15 +119,16 @@ public class PessoaServiceImpl implements PessoaService {
     try {
       if (!validacaoEnderecos(pessoaDTO.getEnderecos())) {
         return ResponseEntity.badRequest()
-            .body("É necessário pelo menos 1 endereço e somente 1 pode ser o principal!");
+            .body(new ResponseModel(
+                "É necessário pelo menos 1 endereço e somente 1 pode ser o principal!"));
       }
       Pessoa pessoa = pessoaRepository.findById(id).orElse(null);
-      Boolean existePessoa = existePessoaCadastrada(pessoaDTO.getNome());
+      Boolean existeNomePessoa = existePessoaCadastrada(pessoaDTO.getNome());
       if (pessoa == null) {
         LOGGER.error("Falha ao atualizar pessoa. Pessoa não encontrado na base de dados!");
         return ResponseEntity.notFound().build();
       }
-      if (existePessoa || pessoaDTO.getNome().equalsIgnoreCase(pessoa.getNome())) {
+      if (existeNomePessoa && !pessoaDTO.getNome().equalsIgnoreCase(pessoa.getNome())) {
         LOGGER.error("Nome já existente na base de dados");
         return ResponseEntity.badRequest()
             .body(new ResponseModel("Nome já existente na base de dados"));
@@ -134,7 +136,7 @@ public class PessoaServiceImpl implements PessoaService {
       pessoa.update(pessoaDTO);
       pessoaRepository.save(pessoa);
       LOGGER.info("Pessoa atualizada com sucesso!");
-      return ResponseEntity.ok().body("pessoa atualizada!");
+      return ResponseEntity.ok().body(new ResponseModel("Pessoa atualizada!"));
 
     } catch (Exception e) {
       LOGGER.error("Falha ao atualizar pessoa.\n" + e.getMessage());
@@ -145,9 +147,13 @@ public class PessoaServiceImpl implements PessoaService {
   @Override
   public ResponseEntity<?> deletar(Long id) {
     try {
-      pessoaRepository.deleteById(id);
-      LOGGER.info("Pessoa deletada com sucesso!");
-      return ResponseEntity.ok().body(new ResponseModel("Pessoa deletada com sucesso!"));
+      if (pessoaRepository.existsById(id)) {
+        pessoaRepository.deleteById(id);
+        LOGGER.info("Pessoa deletada com sucesso!");
+        return ResponseEntity.ok().body(new ResponseModel("Pessoa deletada com sucesso!"));
+      }
+      return ResponseEntity.badRequest()
+          .body(new ResponseModel("ID inválido! Usuario não registrado no banco!"));
     } catch (Exception e) {
       LOGGER.error("Falha ao deletar médico!\n" + e.getMessage());
     }
