@@ -43,12 +43,6 @@
      <scope>runtime</scope>
      <version>1.4.193</version>
     </dependency>
-<!-- versão testada com o xamp 8.0.25 ( windows ) -->
-<!--    <dependency>-->
-<!--      <groupId>org.mariadb.jdbc</groupId>-->
-<!--      <artifactId>mariadb-java-client</artifactId>-->
-<!--      <version>3.1.1</version>-->
-<!--    </dependency>-->
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>

@@ -57,7 +57,7 @@ Uma Pessoa deve ter os seguintes campos
 * Sistema Operacional: Windows (Compativel com linux, testado nas distribuições Ubuntu e Fedora).
 * Java 11 Eclipse Adoptium jdk-11.0.17.8-hotspot.
 * Maven 3.8.6.
-* Banco de dados H2 (em memória).
+* Banco de dados H2 (em memória) versão 1.4.193.
 * Spring Boot 2.7.2
 * JPA para persistencia e manipulação de dados.
 * Bean validation para validações de atributos com validação global do tipo
