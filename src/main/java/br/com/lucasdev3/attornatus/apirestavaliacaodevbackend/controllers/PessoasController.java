@@ -51,12 +51,12 @@ public class PessoasController {
   }
 
   @PostMapping(value = "/salvar", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<?> save(@Valid @RequestBody PessoaDTO pessoaDTO) {
+  public ResponseEntity<?> save(@RequestBody PessoaDTO pessoaDTO) {
     return pessoaService.salvar(pessoaDTO);
   }
 
   @PutMapping(value = "/atualizar/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<?> update(@Valid @RequestBody PessoaDTO pessoaDTO,
+  public ResponseEntity<?> update(@RequestBody PessoaDTO pessoaDTO,
       @PathVariable long id) {
     return pessoaService.atualizar(pessoaDTO, id);
   }

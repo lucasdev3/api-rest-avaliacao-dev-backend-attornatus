@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+import org.apache.log4j.Logger;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,11 +22,14 @@ import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.exceptions.excepti
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+  private static final Logger LOGGER = Logger.getLogger(GlobalExceptionHandler.class);
+
   @ExceptionHandler(MethodArgumentNotValidException.class)
   public ResponseEntity<Map<String, List<String>>> handleValidationErrors(
       MethodArgumentNotValidException ex) {
     List<String> errors = ex.getBindingResult().getFieldErrors()
         .stream().map(FieldError::getDefaultMessage).collect(Collectors.toList());
+    LOGGER.debug(errors.toString());
     return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.BAD_REQUEST);
   }
 
@@ -34,12 +38,14 @@ public class GlobalExceptionHandler {
       ConstraintViolationException ex) {
     List<String> errors = ex.getConstraintViolations().stream().map(ConstraintViolation::getMessage)
         .collect(Collectors.toList());
+    LOGGER.debug(errors.toString());
     return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.BAD_REQUEST);
   }
 
   @ExceptionHandler(Exception.class)
   public final ResponseEntity<Map<String, List<String>>> handleGeneralExceptions(Exception ex) {
     List<String> errors = Collections.singletonList(ex.getMessage());
+    LOGGER.debug(errors.toString());
     return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(),
         HttpStatus.INTERNAL_SERVER_ERROR);
   }
@@ -48,6 +54,7 @@ public class GlobalExceptionHandler {
   public final ResponseEntity<Map<String, List<String>>> handleRuntimeExceptions(
       RuntimeException ex) {
     List<String> errors = Collections.singletonList(ex.getMessage());
+    LOGGER.debug(errors.toString());
     return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(),
         HttpStatus.INTERNAL_SERVER_ERROR);
   }

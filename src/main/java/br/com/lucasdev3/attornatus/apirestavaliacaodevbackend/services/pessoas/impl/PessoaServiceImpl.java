@@ -2,6 +2,7 @@ package br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.services.pessoas.
 
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.validation.Valid;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -95,7 +96,7 @@ public class PessoaServiceImpl implements PessoaService {
   }
 
   @Override
-  public ResponseEntity<?> salvar(PessoaDTO pessoaDTO) {
+  public ResponseEntity<?> salvar(@Valid PessoaDTO pessoaDTO) {
     try {
       if (!validacaoEnderecos(pessoaDTO.getEnderecos())) {
         return ResponseEntity.badRequest()
@@ -115,7 +116,7 @@ public class PessoaServiceImpl implements PessoaService {
   }
 
   @Override
-  public ResponseEntity<?> atualizar(PessoaDTO pessoaDTO, Long id) {
+  public ResponseEntity<?> atualizar(@Valid PessoaDTO pessoaDTO, Long id) {
     try {
       if (!validacaoEnderecos(pessoaDTO.getEnderecos())) {
         return ResponseEntity.badRequest()
