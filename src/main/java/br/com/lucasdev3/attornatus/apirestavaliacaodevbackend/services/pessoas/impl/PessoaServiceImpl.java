@@ -45,7 +45,7 @@ public class PessoaServiceImpl implements PessoaService {
   public ResponseEntity<List<PessoaDTO>> buscarTodosPeloNome(String nome) {
     try {
       List<Pessoa> pessoas = pessoaRepository.findAllByNomeContaining(nome);
-      if (pessoas.iterator().hasNext()) {
+      if (!pessoas.iterator().hasNext()) {
         LOGGER.info("Nenhuma pessoa encontrada pelo nome!");
         return ResponseEntity.notFound().build();
       }
