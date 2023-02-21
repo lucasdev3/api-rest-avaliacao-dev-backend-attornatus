@@ -1,5 +1,8 @@
 package br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.controllers;
 
+import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.dto.EnderecoDTO;
+import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.dto.PessoaDTO;
+import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.services.pessoas.interfaces.PessoaService;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.dto.EnderecoDTO;
-import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.dto.PessoaDTO;
-import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.services.pessoas.interfaces.PessoaService;
 
 @RestController
 @RequestMapping(value = "/pessoas")
@@ -30,35 +30,41 @@ public class PessoasController {
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<List<PessoaDTO>> listAll() {
+  public ResponseEntity<List<PessoaDTO>> buscarTodos() {
     return pessoaService.buscarTodos();
   }
 
   @GetMapping(value = "/buscar", produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<List<PessoaDTO>> listAll(@RequestParam String nome) {
+  public ResponseEntity<List<PessoaDTO>> buscarTodosPeloNome(@RequestParam String nome) {
     return pessoaService.buscarTodosPeloNome(nome);
   }
 
   @GetMapping(value = "/buscar/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<PessoaDTO> getById(@PathVariable long id) {
+  public ResponseEntity<PessoaDTO> buscarPeloId(@PathVariable long id) {
     return pessoaService.buscarPeloId(id);
   }
 
   @GetMapping(value = "/buscar-enderecos/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<List<EnderecoDTO>> getEnderecosById(@PathVariable long id,
+  public ResponseEntity<List<EnderecoDTO>> buscarEnderecoPeloIdPessoa(@PathVariable long id,
       @RequestParam Boolean enderecoPrincipal) {
     return pessoaService.buscarEnderecoPeloId(id, enderecoPrincipal);
   }
 
   @PostMapping(value = "/salvar", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<?> save(@RequestBody PessoaDTO pessoaDTO) {
+  public ResponseEntity<?> salvar(@RequestBody @Valid PessoaDTO pessoaDTO) {
     return pessoaService.salvar(pessoaDTO);
   }
 
   @PutMapping(value = "/atualizar/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<?> update(@RequestBody PessoaDTO pessoaDTO,
+  public ResponseEntity<?> atualizar(@RequestBody @Valid PessoaDTO pessoaDTO,
       @PathVariable long id) {
     return pessoaService.atualizar(pessoaDTO, id);
+  }
+
+  @PutMapping(value = "/adicionar-endereco/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<?> adicionaEnderecoPessoa(@PathVariable Long id,
+      @RequestBody @Valid EnderecoDTO dto) {
+    return pessoaService.adicionaEnderecoPessoa(id, dto);
   }
 
   @DeleteMapping(value = "/deletar/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

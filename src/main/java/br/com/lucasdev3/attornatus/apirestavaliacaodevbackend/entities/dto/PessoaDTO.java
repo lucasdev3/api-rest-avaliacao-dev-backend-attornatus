@@ -17,6 +17,8 @@ import lombok.NoArgsConstructor;
 public class PessoaDTO implements Serializable {
 
   private static final long serialVersionUID = 1L;
+
+  private Long id;
   @NotBlank(message = "nome é obrigatorio")
   private String nome;
 
@@ -28,11 +30,17 @@ public class PessoaDTO implements Serializable {
   @Valid
   private List<EnderecoDTO> enderecos;
 
-  public PessoaDTO(@Valid Pessoa pessoa) {
+  public PessoaDTO(Pessoa pessoa) {
+    this.id = pessoa.getId();
     this.nome = pessoa.getNome();
     this.dataNascimento = pessoa.getDataNascimento();
     this.enderecos = pessoa.getEnderecos();
   }
 
+  public PessoaDTO(String nome, String dataNascimento, List<EnderecoDTO> enderecos) {
+    this.nome = nome;
+    this.dataNascimento = dataNascimento;
+    this.enderecos = enderecos;
+  }
 
 }

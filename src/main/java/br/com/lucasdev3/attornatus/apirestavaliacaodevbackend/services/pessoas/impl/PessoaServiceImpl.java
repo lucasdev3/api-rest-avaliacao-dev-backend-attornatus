@@ -146,6 +146,31 @@ public class PessoaServiceImpl implements PessoaService {
   }
 
   @Override
+  public ResponseEntity<ResponseModel> adicionaEnderecoPessoa(Long id, EnderecoDTO dto) {
+    try {
+      Pessoa pessoa = pessoaRepository.findById(id).orElse(null);
+      if(pessoa == null) {
+        LOGGER.error("Nenhuma pessoa encontrada!");
+        return ResponseEntity.notFound().build();
+      }
+      if(pessoa.getEnderecos().contains(dto)) {
+        return ResponseEntity.badRequest().body(new ResponseModel("Endereço já cadastrado!"));
+      }
+      pessoa.getEnderecos().add(dto);
+      if(!validacaoEnderecos(pessoa.getEnderecos())) {
+        return ResponseEntity.badRequest()
+            .body(new ResponseModel(
+                "É necessário pelo menos 1 endereço e somente 1 pode ser o principal!"));
+      }
+      pessoaRepository.save(pessoa);
+      return ResponseEntity.ok().body(new ResponseModel("Endereço atualizado!"));
+    }catch (Exception e) {
+      LOGGER.error(e);
+    }
+    return ResponseEntity.internalServerError().build();
+  }
+
+  @Override
   public ResponseEntity<?> deletar(Long id) {
     try {
       if (pessoaRepository.existsById(id)) {

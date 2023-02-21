@@ -65,7 +65,7 @@ Uma Pessoa deve ter os seguintes campos
 * Swagger para documentação e testes de requisições na API disponivel na
   url: http://localhost:8080/swagger-ui/
 * Log4j para logs em runtime e criação de um arquivo de logs no diretorio:
-  /log-attornatus-lucasdev3-avaliacao/tmp/attornatus.log
+  ```/tmp/logs/attornatus.log```
 * JUnit para testes unitários
 
 #### Pontos de atenção
@@ -74,8 +74,25 @@ Uma Pessoa deve ter os seguintes campos
 * Verifique a versão do Maven
 * Verifique a versão do Spring Boot
 * Verifique a existencia do diretório de logs do Log4j. Caso a aplicação não crie automaticamente,
-  crie-o manualmente (mais informações no arquivo log4j.properties na raiz do projeto).
+  crie-o manualmente (mais informações no arquivo log4j.properties no pacote de resources projeto).
 * A API fica em execução na porta 8080 local. Garanta que a mesma esteja livre para subir a aplicação.
+  * Compilar projeto e gerar artefato no target:
+    ``` mvn clean package ```
+
+
+  ![img.png](img.png)
+
+
+  * Artefato gerado no diretório ```api-rest-avaliacao-dev-backend-attornatus\target``` dentro do projeto.
+    
+* Execução via terminal
+  * Abra o diretório do artefato e execute o seguinte comando:  ```java -jar api-rest-avaliacao-dev-backend-0.0.1-SNAPSHOT.jar```
+
+#### Base de Dados H2
+http://localhost:8080/h2-console/
+#### Swagger-UI
+http://localhost:8080/swagger-ui/
+ 
 
 #### Regras criadas pelo desenvolvedor
 
@@ -149,8 +166,3 @@ Uma Pessoa deve ter os seguintes campos
       }
     ]
     ```
-
-#### Base de Dados H2
-http://localhost:8080/h2-console/
-#### Swagger-UI
-http://localhost:8080/swagger-ui/

@@ -7,11 +7,9 @@ import javax.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Embeddable
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class EnderecoDTO implements Serializable {
@@ -32,4 +30,7 @@ public class EnderecoDTO implements Serializable {
 
   private Boolean enderecoPrincipal = false;
 
+  public void setEnderecoPrincipal(boolean bool) {
+    this.enderecoPrincipal = bool;
+  }
 }

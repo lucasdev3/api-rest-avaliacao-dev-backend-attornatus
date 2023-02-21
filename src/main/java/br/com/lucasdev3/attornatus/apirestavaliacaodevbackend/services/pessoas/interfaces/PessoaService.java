@@ -1,5 +1,6 @@
 package br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.services.pessoas.interfaces;
 
+import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.utils.ResponseModel;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
 import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.dto.EnderecoDTO;
@@ -21,4 +22,5 @@ public interface PessoaService {
 
   ResponseEntity<?> deletar(Long id);
 
+  ResponseEntity<ResponseModel> adicionaEnderecoPessoa(Long id, EnderecoDTO dto);
 }
