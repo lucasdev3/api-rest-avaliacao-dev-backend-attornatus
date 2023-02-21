@@ -93,7 +93,7 @@ public class PessoaIntegracaoTest {
         new PessoaDTO("lucas6", "20-06-1996", List.of(enderecoPessoa)));
 
     HttpStatus statusCodeSave = service.atualizar(new PessoaDTO(pessoa), 1L).getStatusCode();
-    Assertions.assertEquals(HttpStatus.BAD_REQUEST, statusCodeSave);
+    Assertions.assertEquals(HttpStatus.NOT_FOUND, statusCodeSave);
 
   }
 

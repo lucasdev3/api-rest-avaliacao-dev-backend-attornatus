@@ -8,19 +8,19 @@ import br.com.lucasdev3.attornatus.apirestavaliacaodevbackend.entities.dto.Pesso
 
 public interface PessoaService {
 
-  ResponseEntity<List<PessoaDTO>> buscarTodos();
+  ResponseEntity<ResponseModel> buscarTodos();
 
-  ResponseEntity<List<PessoaDTO>> buscarTodosPeloNome(String nome);
+  ResponseEntity<ResponseModel> buscarTodosPeloNome(String nome);
 
-  ResponseEntity<PessoaDTO> buscarPeloId(Long id);
+  ResponseEntity<ResponseModel> buscarPeloId(Long id);
 
-  ResponseEntity<List<EnderecoDTO>> buscarEnderecoPeloId(Long id, Boolean enderecoPrincipal);
+  ResponseEntity<ResponseModel> buscarEnderecoPeloId(Long id, Boolean enderecoPrincipal);
 
-  ResponseEntity<?> salvar(PessoaDTO pessoaDTO);
+  ResponseEntity<ResponseModel> salvar(PessoaDTO pessoaDTO);
 
-  ResponseEntity<?> atualizar(PessoaDTO pessoaDTO, Long id);
+  ResponseEntity<ResponseModel> atualizar(PessoaDTO pessoaDTO, Long id);
 
-  ResponseEntity<?> deletar(Long id);
+  ResponseEntity<ResponseModel> deletar(Long id);
 
   ResponseEntity<ResponseModel> adicionaEnderecoPessoa(Long id, EnderecoDTO dto);
 }

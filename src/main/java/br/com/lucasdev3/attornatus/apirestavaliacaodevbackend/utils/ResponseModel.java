@@ -9,13 +9,18 @@ import lombok.Setter;
 @Setter
 public class ResponseModel {
 
-  private String date;
+  private String date = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss:SSS").format(new Date());
 
   private String message;
 
+  private Object objectResponse;
+
   public ResponseModel(String message) {
-    this.date = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss:SSS").format(new Date());
     this.message = message;
   }
 
+  public ResponseModel(String message, Object objectResponse) {
+    this.message = message;
+    this.objectResponse = objectResponse;
+  }
 }
